@@ -5,7 +5,7 @@
 
 <template>
   <MainHeader />
-  <main class="max-w-screen-xl m-auto">
+  <main class="max-w-screen-2xl m-auto">
     <RouterView />
   </main>
 </template>

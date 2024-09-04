@@ -18,6 +18,11 @@ const currentCategory = computed<string>(() => {
     return router.currentRoute.value.params.category as string;
 });
 
+
+const capitalize = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 </script>
 
 <template>
@@ -32,7 +37,7 @@ const currentCategory = computed<string>(() => {
             <li v-for="(category, index) in categories" :key="index"
                 :class="{ 'underline': currentCategory === category }">
                 <RouterLink :to="`/products/${category}`">
-                    {{ category }}
+                    {{ capitalize(category) }}
                 </RouterLink>
             </li>
         </ul>
