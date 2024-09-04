@@ -1,4 +1,4 @@
-import { createWebHistory, createRouter } from 'vue-router';
+import { createWebHistory, createRouter, onBeforeRouteUpdate } from 'vue-router';
 
 import HomeView from './../views/HomeView.vue';
 import ProductsView from './../views/ProductsView.vue';
@@ -7,9 +7,12 @@ import axios from 'axios';
 
 const routes = [
   { path: '/', component: HomeView },
-  { path: '/products', component: ProductsView },
   {
-    path: '/products/:id',
+    path: '/products/:category?',
+    component: ProductsView
+  },
+  {
+    path: '/product/:id',
     component: ProductView,
     props: true,
     beforeEnter: (to: any, from: any, next: any) => {
