@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router';
 const drawerComponent = ref(null);
 const router = useRouter();
 const onRouteChange = (path: string) => {
+    // @ts-ignore
     drawerComponent?.value?.closeDrawer()
     router.push(path);
 }
@@ -17,7 +18,7 @@ const onRouteChange = (path: string) => {
         </template>
         <template v-slot:content>
             <nav class="flex flex-col gap-3 text-xl items-start">
-                <button @click="onRouteChange('/')">Whats new</button>
+                <button @click="onRouteChange('/')">Home</button>
                 <button @click="onRouteChange('/products')">Products</button>
             </nav>
         </template>

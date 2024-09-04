@@ -3,12 +3,18 @@ import { ref } from 'vue';
 import { Product } from './../types/Product';
 import { useRoute } from 'vue-router';
 import ProductRatings from './../components/ProductRatings.vue';
-
+import { useCartStore } from './../stores/cart';
 
 
 const route = useRoute();
 // @ts-ignore
 const product = ref<Product>(route.params.product);
+
+
+const cartStore = useCartStore();
+const onAddToCart = (product: Product) => {
+    cartStore.addProduct(product);
+}
 
 </script>
 
@@ -27,10 +33,11 @@ const product = ref<Product>(route.params.product);
                     <hr>
                     <p class=" max-w-prose text-sm opacity-80"> {{ product.description }}</p>
                     <hr>
-                    <ProductRatings :rating="product.rating" showText/>
+                    <ProductRatings :rating="product.rating" showText />
                 </div>
 
-                <button class="bg-primary text-white rounded-full py-4 relative text-lg tracking-wider">
+                <button class="btn-primary"
+                    @click="onAddToCart(product)">
                     <span class="absolute left-8 top-1/2 -translate-y-1/2 w-5">
                         <img src="./../assets/svg/plus-solid.svg" alt="Add to cart icon">
                     </span>

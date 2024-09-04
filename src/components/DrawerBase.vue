@@ -22,7 +22,7 @@ defineExpose({
 </script>
 <template>
     <div class="">
-        <button class="btn-icon" @click="toggleDrawer()">
+        <button class="btn-icon relative" @click="toggleDrawer()">
             <slot name="icon"> </slot>
         </button>
 
@@ -31,17 +31,20 @@ defineExpose({
         </transition>
 
         <transition :name="placeRight ? 'slide-right' : 'slide-left'">
-            <main v-if="isOpen" class="fixed top-0 bg-white h-screen w-full max-w-96 z-20 shadow-md p-4"
+            <main v-if="isOpen"
+                class="fixed top-0 bg-white min-h-screen h-full w-full max-w-96 z-20 shadow-md p-6 overflow-y-auto"
                 :class="placeRight ? 'right-0' : 'left-0'">
-                <header class="flex items-center justify-between pb-4"
-                    :class="placeRight ? 'flex-row-reverse' : 'flex-row'">
-                    <button class="btn-icon" @click="closeDrawer()">
-                        <img src="./../assets/svg/xmark-solid.svg" alt="close button">
-                    </button>
-                    <h2 class="text-2xl font-bold">{{ title }}</h2>
-                </header>
-                <div>
-                    <slot name="content"> </slot>
+                <div class="h-full flex flex-col">
+                    <header class="flex items-center justify-between pb-4"
+                        :class="placeRight ? 'flex-row-reverse' : 'flex-row'">
+                        <button class="btn-icon" @click="closeDrawer()">
+                            <img src="./../assets/svg/xmark-solid.svg" alt="close button">
+                        </button>
+                        <h2 class="text-xl  tracking-wider opacity-75">{{ title }}</h2>
+                    </header>
+                    <div class="grow">
+                        <slot name="content"> </slot>
+                    </div>
                 </div>
             </main>
         </transition>
