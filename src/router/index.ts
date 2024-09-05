@@ -1,24 +1,14 @@
-import {
-  createWebHistory,
-  createRouter,
-  onBeforeRouteUpdate,
-  onBeforeRouteLeave,
-} from 'vue-router';
-
+import { createWebHistory, createRouter } from 'vue-router';
 import HomeView from './../views/HomeView.vue';
 import ProductsView from './../views/ProductsView.vue';
 import ProductView from './../views/ProductView.vue';
 import axios from 'axios';
-import { onBeforeUpdate } from 'vue';
 
 const routes = [
   { path: '/', component: HomeView },
   {
     path: '/products/:category?',
     component: ProductsView,
-    onBeforeUpdate: (to: any, from: any) => {
-      console.log('onBeforeUpdate');
-    },
   },
   {
     path: '/product/:id',
@@ -43,7 +33,6 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-
 
 router.beforeEach((to: any, from: any, next: any) => {
   if (

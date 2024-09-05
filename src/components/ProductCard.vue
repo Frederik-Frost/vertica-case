@@ -34,7 +34,6 @@ const toProduct = (id: number) => {
                 <span class="text-white text-sm text-nowrap bg-primary rounded-full px-2 py-1">{{ product.price }}
                     $</span>
             </div>
-
         </a>
     </li>
 </template>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Product } from './../types/Product';
-import { useRoute } from 'vue-router';
-import ProductRatings from './../components/ProductRatings.vue';
+import { useRoute, onBeforeRouteUpdate } from 'vue-router';
 import { useCartStore } from './../stores/cart';
+import axios from 'axios';
 
+import ProductRatings from './../components/ProductRatings.vue';
+import ProductCard from './../components/ProductCard.vue';
+import { watch } from 'fs';
 
 const route = useRoute();
 // @ts-ignore
@@ -15,6 +18,31 @@ const cartStore = useCartStore();
 const onAddToCart = (product: Product) => {
     cartStore.addProduct(product);
 }
+
+const categoryProducts = ref<Product[]>([]);
+const getCategoryProducts = () => {
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/products/category/${product.value.category}`).then((response) => {
+        categoryProducts.value = response.data;
+    })
+}
+onMounted(() => {
+    getCategoryProducts();
+})
+
+
+const getNewProductData = (id: number) => {
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/products/${id}`)
+        .then((response) => {
+            product.value = response.data;
+            window.scrollTo(0, 0);
+        })
+}
+onBeforeRouteUpdate((to: any, from: any) => {
+    if (to.params.id !== from.params.id) {
+        getNewProductData(to.params.id);
+    }
+})
+
 
 </script>
 
@@ -36,8 +64,7 @@ const onAddToCart = (product: Product) => {
                     <ProductRatings :rating="product.rating" showText />
                 </div>
 
-                <button class="btn-primary"
-                    @click="onAddToCart(product)">
+                <button class="btn-primary" @click="onAddToCart(product)">
                     <span class="absolute left-8 top-1/2 -translate-y-1/2 w-5">
                         <img src="./../assets/svg/plus-solid.svg" alt="Add to cart icon">
                     </span>
@@ -48,10 +75,16 @@ const onAddToCart = (product: Product) => {
         </section>
 
 
+        <section class="py-8">
+            <div class="mb-4">
+                <h3 class=" text-2xl font-bold">More in Category</h3>
+                <span class=" text-sm opacity-50">{{ product.category }}</span>
+            </div>
 
-
-
-
-        <!-- <ProductCard v-if="product" :product="product" /> -->
+            <ul class="flex flex-row gap-4 overflow-hidden overflow-x-auto">
+                <ProductCard v-for="product in categoryProducts" :key="product.id" :product="product"
+                    class="min-w-[200px] md:min-w-[250px] max-w-[300px]" />
+            </ul>
+        </section>
     </main>
 </template>

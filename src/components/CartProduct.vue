@@ -35,5 +35,8 @@ const props = defineProps<{
             </div>
         </div>
 
+        
+        <button class="self-end" @click.prevent.stop="$emit('onRemoveProduct', product.id)"><img src="./../assets/svg/trash-solid.svg" alt="Remove from cart icon" class="w-[14px] opacity-75"></button>
+
     </li>
 </template>
