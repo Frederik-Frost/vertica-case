@@ -55,7 +55,7 @@ onBeforeRouteUpdate((to: any, from: any) => {
 
             <div class="p-4 flex flex-col justify-between gap-3 md:basis-1/3">
                 <div class="flex flex-col gap-3">
-                    <h1 class="text-5xl font-medium">{{ product.title }}</h1>
+                    <h1 class="text-3xl md:text-5xl font-medium">{{ product.title }}</h1>
                     <p class="px-3 py-2 text-sm rounded-full bg-primary text-white self-start">$ {{ product.price }}</p>
                     <hr>
                     <p class=" max-w-prose text-sm opacity-80"> {{ product.description }}</p>
