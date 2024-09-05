@@ -1,15 +1,24 @@
-import { createWebHistory, createRouter, onBeforeRouteUpdate } from 'vue-router';
+import {
+  createWebHistory,
+  createRouter,
+  onBeforeRouteUpdate,
+  onBeforeRouteLeave,
+} from 'vue-router';
 
 import HomeView from './../views/HomeView.vue';
 import ProductsView from './../views/ProductsView.vue';
 import ProductView from './../views/ProductView.vue';
 import axios from 'axios';
+import { onBeforeUpdate } from 'vue';
 
 const routes = [
   { path: '/', component: HomeView },
   {
     path: '/products/:category?',
-    component: ProductsView
+    component: ProductsView,
+    onBeforeUpdate: (to: any, from: any) => {
+      console.log('onBeforeUpdate');
+    },
   },
   {
     path: '/product/:id',
@@ -33,6 +42,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+
+router.beforeEach((to: any, from: any, next: any) => {
+  if (
+    to.path.startsWith('/products') &&
+    from.path.startsWith('/products') &&
+    from.query.sortBy &&
+    !to.query.sortBy
+  ) {
+    next({
+      path: to.path,
+      query: { ...to.query, sortBy: from.query.sortBy },
+    });
+  } else next();
 });
 
 export default router;

@@ -9,7 +9,7 @@
             Welcome
         </h1>
         <h2 class="text-2xl opacity-50">
-            Browse our products
+            Browse some products
         </h2>
         <RouterLink to="/products" class="btn-primary">
             View products

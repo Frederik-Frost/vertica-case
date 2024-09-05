@@ -7,7 +7,7 @@ import DrawerCart from './DrawerCart.vue';
     <header class="flex justify-between items-center p-4">
         <DrawerNav />
         <RouterLink to="/">
-            <img src="./../assets/svg/logo.svg" alt="logo" class="w-16 md:w-20 " />
+            <img src="./../assets/svg/logo.svg" alt="logo" class="w-20 md:w-24 " />
         </RouterLink>
         <DrawerCart />
     </header>

@@ -1,28 +1,10 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { useRouter, onBeforeRouteUpdate } from 'vue-router';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { SortingType } from './../types/SortingType';
+import ProductSort from './../utils/ProductSort';
 
-type SortingType = {
-    name: string,
-    query: string
-}
-
-const sortingTypes = ref<SortingType[]>(
-    [
-        {
-            name: 'Price: low to high',
-            query: 'price-ascending',
-        },
-        {
-            name: 'Price: high to low',
-            query: 'price-descending',
-        },
-        {
-            name: 'A - Z',
-            query: 'name-ascending',
-        },
-    ]
-)
+const sortingTypes = computed<SortingType[]>(() => ProductSort.sortingTypes)
 
 const router = useRouter();
 const currentSorting = computed(() => {
@@ -32,16 +14,6 @@ const currentSorting = computed(() => {
 const setSortingQuery = (query: string) => {
     router.push({ query: { 'sortBy': query } })
 }
-
-onBeforeRouteUpdate((to, from, next) => {
-    if (from.query.sortBy && !to.query.sortBy) {
-        next({
-            path: to.path,
-            query: { ...to.query, sortBy: from.query.sortBy },
-        });
-    } else next();
-})
-
 </script>
 
 <template>
