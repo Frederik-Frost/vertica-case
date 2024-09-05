@@ -7,7 +7,6 @@ import axios from 'axios';
 
 import ProductRatings from './../components/ProductRatings.vue';
 import ProductCard from './../components/ProductCard.vue';
-import { watch } from 'fs';
 
 const route = useRoute();
 // @ts-ignore

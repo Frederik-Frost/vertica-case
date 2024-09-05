@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { ref, defineProps, onMounted, defineExpose } from 'vue';
+import { defineProps } from 'vue';
 import { Product } from './../types/Product';
-import { useRouter } from 'vue-router';
-import ProductRatings from './ProductRatings.vue';
-
 
 const props = defineProps<{
     product: Product;
@@ -30,7 +27,7 @@ const props = defineProps<{
 
             <div class="flex items-center gap-2">
                 <span class="text-xs opacity-50">
-                    x{{ quantity }}
+                    x{{ props.quantity }}
                 </span>
             </div>
         </div>

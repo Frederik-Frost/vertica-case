@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DrawerBase from './DrawerBase.vue';
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useCartStore } from './../stores/cart';
 import CartProduct from './CartProduct.vue';
 

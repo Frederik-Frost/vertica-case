@@ -25,7 +25,7 @@ const toProduct = (id: number) => {
 
             <div
                 class="absolute top-4 left-4 opacity-0 bg-white/70 backdrop-blur-md p-1 rounded-full border border-gray-400  -translate-y-2 group-hover:opacity-100 group-hover:-translate-y-0 transition-all">
-                <ProductRatings :rating="product.rating" />
+                <ProductRatings :rating="props.product.rating" />
             </div>
 
             <div

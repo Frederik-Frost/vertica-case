@@ -18,12 +18,12 @@ const skeletons = ref<number>(9);
 
     <Transition name="fade">
         <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8" v-if="!loading">
-            <ProductCard v-for="product in products" :key="product.id" :product="product" />
+            <ProductCard v-for="product in props.products" :key="product.id" :product="product" />
         </ul>
     </Transition>
     <Transition name="fade">
         <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8" v-if="loading">
-            <li v-for="(skeleton, index) in skeletons" :key="index"
+            <li v-for="( index) in skeletons" :key="index"
                 class="p-4 list-none rounded-lg border border-gray-100 bg-gray-100/75 aspect-square">
             </li>
         </ul>

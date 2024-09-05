@@ -14,6 +14,7 @@ const routes = [
     path: '/product/:id',
     component: ProductView,
     props: true,
+    //@ts-ignore
     beforeEnter: (to: any, from: any, next: any) => {
       axios
         .get(`${import.meta.env.VITE_API_BASE_URL}/products/${to.params.id}`)

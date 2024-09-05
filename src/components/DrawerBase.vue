@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps, onMounted, defineExpose } from 'vue';
+import { ref, defineProps, defineExpose } from 'vue';
 
 const props = defineProps<{
     placeRight?: boolean;
@@ -40,7 +40,7 @@ defineExpose({
                         <button class="btn-icon" @click="closeDrawer()">
                             <img src="./../assets/svg/xmark-solid.svg" alt="close button">
                         </button>
-                        <h2 class="text-xl  tracking-wider opacity-75">{{ title }}</h2>
+                        <h2 class="text-xl  tracking-wider opacity-75">{{ props.title }}</h2>
                     </header>
                     <div class="grow">
                         <slot name="content"> </slot>
